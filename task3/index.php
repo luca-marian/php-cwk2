@@ -15,7 +15,7 @@
 	</header>
 	<main>
 		<?php
-		#Your PHP solution code should go here...
+		# Your PHP solution code should go here...
 		require_once 'includes/functions.php';
 
 		# Variables to store the database connection details
@@ -42,30 +42,37 @@
 		# Check if the save button has been pressed
 		if (isset($_POST['userDataSubmitted'])) {
 
+			# Check if the user has entered data
 			if (isset($_POST['email'], $_POST['username'], $_POST['password'], $_POST['userType'])) {
+
+				# Variables to store the user forms information, and sanitise the data for white space
 				$email = $formPlaceholders['[+email+]'] = trim($_POST['email']);
 				$username = $formPlaceholders['[+username+]'] = trim($_POST['username']);
 				$password = $formPlaceholders['[+password+]'] = trim($_POST['password']);
 				$userType = $formPlaceholders['[+userType+]'] = trim($_POST['userType']);
 
+				# Check if the user has entered valid email address
 				if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($email)) {
 					$error_message = "Invalid email format";
 					$formPlaceholders['[+emailError+]'] = $error_message;
 					$validData = FALSE;
 				}
 
+				# Check if the user has entered valid username, with at least 8 characters and alphanumeric
 				if ((strlen($username) < 8) || (!ctype_alnum($username)) || empty($username)) {
 					$error_message = htmlentities("Less than 8 characters or NOT alphanumeric!");
 					$formPlaceholders['[+usernameError+]'] = $error_message;
 					$validData = FALSE;
 				}
 
+				# Check if the user has entered valid password, with at least 8 characters, one uppercase, one lowercase, one number, and one special character
 				if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!<>£$%&*~#]).{8,}$/", $password) || empty($password)) {
 					$error_message = htmlentities("Not in the required password format");
 					$formPlaceholders['[+passwordError+]'] = $error_message;
 					$validData = FALSE;
 				}
 
+				# Check if the user has selected a valid user type
 				if (!in_array($userType, ['admin', 'academic', 'student'])) {
 					$error_message = "Invalid user type";
 					$formPlaceholders['[+userTypeError+]'] = $error_message;
@@ -78,7 +85,7 @@
 					$formPlaceholders['[+studentSelected+]'] = 'selected';
 				}
 
-
+				# Check if the user has entered a unique email and username
 				if (!empty($email)) {
 					if (queryUnique($pdo, $tableName, "email", $email) === 0) {
 						$error_message = "This email is already registered!";
@@ -94,6 +101,7 @@
 					}
 				}
 
+				# Check if the user has entered valid data, and if so, insert the data into the database
 				if ($validData === TRUE) {
 
 					try {
@@ -112,17 +120,15 @@
 				}
 				if ($validData === TRUE) {
 					echo renderParagraph("New user $username successfully inserted into database");
-					$formPlaceholders = clearFormPlaceholders();
+					$formPlaceholders = clearFormPlaceholders(); // Clear the form placeholders after successful submission
 				}
 			}
 		}
 
+		# Render the form and the users stored in the database
 		echo renderTemplate($formPlaceholders);
-
 		echo reanderHeadings("Users stored in the Database", 2);
-
 		renderUsersFromDatabase($pdo, $tableName);
-
 
 		?>
 	</main>

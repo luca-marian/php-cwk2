@@ -9,22 +9,7 @@ session_start();
 
 echo "<h1>Web Programming Using PHP - Coursework 2 - Task 4</h1>";
 #check for login form submission, authenticate user credentials, set session variables, set view from Cookie or 'home'
-include 'html/loginFormTemplate.html';
 
-if (isset($_POST['login'])) {
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$login = login($pdo, $username, $password);
-	if ($login) {
-		$_SESSION['username'] = $username;
-		$_SESSION['password'] = $password;
-		$_SESSION['logged_in'] = true;
-		$_SESSION['view'] = 'home';
-	} else {
-		$_SESSION['logged_in'] = false;
-		$_SESSION['view'] = 'login';
-	}
-}
 
 #set login form placeholder data depending on results of login form authenication
 
