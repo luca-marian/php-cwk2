@@ -1,0 +1,63 @@
+<div id="userForm">
+  <form method="post" novalidate>
+    <!-- post data to this script as no action attribute specified-->
+    <fieldset>
+      <div>
+        <label for="email">Email</label>
+        <input
+          title="email format required and UNIQUE"
+          type="text"
+          name="email"
+          id="email"
+          value="[+email+]"
+          maxlength="45"
+          size="45"
+        />
+        <span style="color: red"> [+emailError+] </span>
+        <!-- display error message if email is not valid-->
+      </div>
+      <div>
+        <label for="username">Username</label>
+        <input
+          title="Alphanumeric >=8 characters and UNIQUE"
+          type="text"
+          name="username"
+          id="username"
+          value="[+username+]"
+          maxlength="30"
+          size="45"
+        />
+        <span style="color: red"> [+usernameError+] </span>
+        <!-- display error message if username is not valid-->
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input
+          title=">= 8 characters, MUST include, uppercase, lowercase, a number, plus one of ! - < > £ $ % & * ~ #"
+          type="text"
+          name="password"
+          id="password"
+          value="[+password+]"
+          maxlength="15"
+          size="45"
+        />
+        <span style="color: red"> [+passwordError+] </span>
+        <!-- display error message if password is not valid-->
+      </div>
+      <div>
+        <label for="userType">User Type</label>
+        <select
+          title="Select either Academic, Admin or Student"
+          name="userType"
+          id="userType"
+        >
+          <option value="academic">Academic</option>
+          <option value="admin">Admin</option>
+          <option value="student">Student</option>
+        </select>
+      </div>
+      <input type="submit" name="userDataSubmitted" value="Save" />
+      <input type="submit" name="userDataClear" value="Clear" />
+    </fieldset>
+  </form>
+</div>
