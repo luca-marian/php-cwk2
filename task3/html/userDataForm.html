@@ -51,9 +51,9 @@
           name="userType"
           id="userType"
         >
-          <option value="academic">Academic</option>
-          <option value="admin">Admin</option>
-          <option value="student">Student</option>
+          <option value="academic" [+academicSelected+]>Academic</option>
+          <option value="admin" [+adminSelected+]>Admin</option>
+          <option value="student" [+studentSelected+]>Student</option>
         </select>
       </div>
       <input type="submit" name="userDataSubmitted" value="Save" />

@@ -70,7 +70,14 @@
 					$error_message = "Invalid user type";
 					$formPlaceholders['[+userTypeError+]'] = $error_message;
 					$validData = FALSE;
+				} elseif ($userType === 'admin') {
+					$formPlaceholders['[+adminSelected+]'] = 'selected';
+				} elseif ($userType === 'academic') {
+					$formPlaceholders['[+academicSelected+]'] = 'selected';
+				} elseif ($userType === 'student') {
+					$formPlaceholders['[+studentSelected+]'] = 'selected';
 				}
+
 
 				if (!empty($email)) {
 					if (queryUnique($pdo, $tableName, "email", $email) === 0) {
