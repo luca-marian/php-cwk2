@@ -1,17 +1,17 @@
 <?php
-#your PDO database connection code should go here
+# your PDO database connection code should go here
 
-function connectToDatabase($host, $db, $user, $password)
-{
-    # Connect to the database
-    try {
-        $dsn = "mysql:host=$host;dbname=$db";
-        $pdo = new PDO($dsn, $user, $password);
-        // echo "<p>Connected to the $db database</p>";
-    } catch (PDOException $e) {
-        echo "<p>Unable to connect to the database: " . $e->getMessage() . "</p>";
-        exit;
-    }
+$host = "127.0.0.1";
+$user = "root";
+$password = "";
+$db = "webprogramming";
+$tableName = "usersTable";
 
-    return $pdo;
+# Connect to the database
+try {
+    $dsn = "mysql:host=$host;dbname=$db";
+    $pdo = new PDO($dsn, $user, $password);
+} catch (PDOException $e) {
+    echo "<p>Unable to connect to the database: " . $e->getMessage() . "</p>";
+    exit;
 }
